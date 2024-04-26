@@ -8,6 +8,18 @@ export const texts = StyleSheet.create({
     marginBottom: 16,
     letterSpacing: 4,
   },
+  title2: {
+    color: colors.white,
+    fontSize: 26,
+    marginBottom: 16,
+    letterSpacing: 4,
+  },
+  title3: {
+    color: colors.white,
+    fontSize: 22,
+    marginBottom: 16,
+    letterSpacing: 4,
+  },
   text1: {
     color: colors.lightGrey,
     fontSize: 18,

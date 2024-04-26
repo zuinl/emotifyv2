@@ -11,41 +11,41 @@ SplashScreen.preventAutoHideAsync();
 setTimeout(SplashScreen.hideAsync, 3000);
 
 const Home = () => {
-    return (
-        <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
-            <ImageBackground
-                source={{
-                    uri: homeBGUrl,
-                }}
-                style={styles.imageBg}
-            >
-                <View style={styles.container}>
-                    <View style={styles.logoContainer}>
-                        <Image source={{ uri: logoUrl }} style={styles.logo} />
-                    </View>
-                    <View style={styles.contentContainer}>
-                        <Text style={[texts.title1, { textAlign: "center" }]}>
-                            Comece sua história musical
-                        </Text>
-                        <Text style={[texts.text1, { textAlign: "center" }]}>
-                            Música é arte. Arte é emoção. O Emotify une tudo isso. Ouça suas
-                            músicas e registre sua história com elas.
-                        </Text>
+  return (
+    <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
+      <ImageBackground
+        source={{
+          uri: homeBGUrl,
+        }}
+        style={styles.imageBg}
+      >
+        <View style={styles.container}>
+          <View style={styles.logoContainer}>
+            <Image source={{ uri: logoUrl }} style={styles.logo} />
+          </View>
+          <View style={styles.contentContainer}>
+            <Text style={[texts.title1, { textAlign: "center" }]}>
+              Comece sua história musical
+            </Text>
+            <Text style={[texts.text1, { textAlign: "center" }]}>
+              Música é arte. Arte é emoção. O Emotify une tudo isso. Ouça suas
+              músicas e registre sua história com elas.
+            </Text>
 
-                        <Link href="/pages/connect" asChild>
-                            <Button
-                                text="Dê o play"
-                                onPress={() => { }}
-                                variant="primary"
-                                fill="ghost"
-                                customStyle={{ marginTop: 80 }}
-                            />
-                        </Link>
-                    </View>
-                </View>
-            </ImageBackground>
-        </BaseLayoutProvider>
-    );
+            <Link href="/pages/connect" asChild>
+              <Button
+                text="Dê o play"
+                onPress={() => {}}
+                variant="primary"
+                fill="ghost"
+                customStyle={{ marginTop: 80 }}
+              />
+            </Link>
+          </View>
+        </View>
+      </ImageBackground>
+    </BaseLayoutProvider>
+  );
 };
 
 export default Home;

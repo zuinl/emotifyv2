@@ -6,14 +6,14 @@ import { BaseLayout } from "@components/base-layout/base-layout";
 const BaseLayoutContext = createContext(null);
 
 export const BaseLayoutProvider = ({
-    children,
-    baseViewProps,
+  children,
+  baseViewProps,
 }: BaseLayoutProviderProps) => {
-    return (
-        <BaseLayoutContext.Provider value={null}>
-            <StatusBar style="dark" />
+  return (
+    <BaseLayoutContext.Provider value={null}>
+      <StatusBar style="dark" />
 
-            <BaseLayout viewProps={baseViewProps}>{children}</BaseLayout>
-        </BaseLayoutContext.Provider>
-    );
+      <BaseLayout viewProps={baseViewProps}>{children}</BaseLayout>
+    </BaseLayoutContext.Provider>
+  );
 };

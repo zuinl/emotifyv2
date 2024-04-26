@@ -7,4 +7,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 20,
   },
+  scrollContainer: {
+    height: "auto",
+    width: "100%",
+    marginBottom: 28,
+  },
+  playlistsContainer: {
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    gap: 16,
+  }
 });

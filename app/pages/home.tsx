@@ -1,20 +1,54 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { BaseLayoutProvider } from "@contexts/base-layout.context";
 import { texts } from "@styles/texts";
 import { styles } from "@styles/pages/home";
 import { Header } from "../components/header/header";
+import { TabMenu } from "../components/tab-menu/tab-menu";
+import { useHomePage } from "../containers/use-home-page";
+import { PlaylistCard } from "../components/playlist-card/playlist-card";
+import { homeBGUrl } from "../constants/images";
 
 const Home = () => {
-    return (
-        <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
-            <View style={styles.container}>
-                <Header />
-                <Text style={[texts.text2]}>
-                    Home page
-                </Text>
+  const { tab, onTabChange } = useHomePage();
+  return (
+    <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
+      <View style={styles.container}>
+        <Header />
+        <TabMenu activeTab={tab} onTabPress={onTabChange} />
+
+        {tab === "now" && (
+          <View>
+            <Text style={texts.title3}>Suas playlists</Text>
+
+            <View style={styles.scrollContainer}>
+              <ScrollView contentContainerStyle={styles.playlistsContainer}>
+                <PlaylistCard
+                  title="bad guy"
+                  duration="1h43"
+                  onPress={() => {}}
+                  imageUrl={homeBGUrl}
+                />
+                <PlaylistCard
+                  title="bad guy"
+                  duration="1h43"
+                  onPress={() => {}}
+                  imageUrl={homeBGUrl}
+                />
+                <PlaylistCard
+                  title="bad guy"
+                  duration="1h43"
+                  onPress={() => {}}
+                  imageUrl={homeBGUrl}
+                />
+              </ScrollView>
             </View>
-        </BaseLayoutProvider>
-    );
+
+            <Text style={texts.title3}>Mais ouvidas</Text>
+          </View>
+        )}
+      </View>
+    </BaseLayoutProvider>
+  );
 };
 
 export default Home;

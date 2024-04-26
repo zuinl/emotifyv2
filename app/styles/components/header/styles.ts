@@ -5,7 +5,9 @@ export const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     flexWrap: "nowrap",
-    marginBottom: 28,
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 36,
   },
   logo: {
     width: 90,
