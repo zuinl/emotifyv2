@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "As It Was",
+    "artist": "Harry Styles",
+    "album": "Unknown",
+    "artistId": 1,
+    "albumId": 1,
+    "duration": "5:33",
+    "liked": false,
+    "playing": true
+  },
+  {
+    "id": 2,
+    "title": "bad guy",
+    "artist": "Billie Eilish",
+    "album": "when we all fall asleep where do we go?",
+    "artistId": 2,
+    "albumId": 2,
+    "duration": "2:33",
+    "liked": true,
+    "playing": false
+  }
+]

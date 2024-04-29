@@ -16,5 +16,9 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "nowrap",
     gap: 16,
-  }
+  },
+  songListContainer: {
+    width: "100%",
+    gap: 12,
+  },
 });
