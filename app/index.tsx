@@ -1,4 +1,4 @@
-import { ImageBackground, Text, View, Image } from "react-native";
+import { ImageBackground, Text, View, Image, Linking } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { BaseLayoutProvider } from "@contexts/base-layout.context";
 import { texts } from "@styles/texts";
@@ -6,11 +6,36 @@ import { styles } from "@styles/pages";
 import { homeBGUrl, logoUrl } from "./constants/images";
 import { Button } from "@components/button/button";
 import { Link } from "expo-router";
+//@ts-ignore
+import TextEncodingPolyfill from "text-encoding";
+import BigInt from "big-integer";
+import { useEffect, useState } from "react";
 
 SplashScreen.preventAutoHideAsync();
 setTimeout(SplashScreen.hideAsync, 3000);
 
+Object.assign(global, {
+  TextEncoder: TextEncodingPolyfill.TextEncoder,
+  TextDecoder: TextEncodingPolyfill.TextDecoder,
+  BigInt: BigInt,
+});
+
 const Home = () => {
+  const [parameters, setParameters] = useState({ test: "oi" });
+
+  useEffect(() => {
+    const handleURL = (event: any) => {
+      const { url } = event;
+      const params = new URLSearchParams(url);
+      //@ts-ignore
+      setParameters(params);
+    };
+
+    const subscription = Linking.addEventListener("url", handleURL);
+
+    return () => subscription.remove();
+  }, []);
+
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
       <ImageBackground
@@ -31,6 +56,10 @@ const Home = () => {
               Música é arte. Arte é emoção. O Emotify une tudo isso. Ouça suas
               músicas e registre sua história com elas.
             </Text>
+
+            {Object.entries(parameters).map(([key, value]) => (
+              <Text key={key} style={texts.text2}>{`${key}: ${value}`}</Text>
+            ))}
 
             <Link href="/pages/connect" asChild>
               <Button

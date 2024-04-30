@@ -7,7 +7,12 @@
       "@tps/*": ["./app/types/*"],
       "@contexts/*": ["./app/contexts/*"],
       "@components/*": ["./app/components/*"],
-      "@styles/*": ["./app/styles/*"]
+      "@styles/*": ["./app/styles/*"],
+      "@services/*": ["./app/services/*"],
+      "@containers/*": ["./app/containers/*"],
+      "@pages/*": ["./app/pages/*"],
+      "@utils/*": ["./app/utils/*"],
+      "@hooks/*": ["./app/hooks/*"],
     }
   }
 }
