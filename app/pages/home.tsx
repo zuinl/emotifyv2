@@ -10,9 +10,11 @@ import { homeBGUrl } from "../constants/images";
 import { SongChip } from "../components/song-chip/song-chip";
 
 import mkSongs from "../assets/mocks/songs.json";
+import { useGetPlaylists } from "@services/get-playlists";
 
 const Home = () => {
   const { tab, onTabChange } = useHomePage();
+  const { data, error } = useGetPlaylists();
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
       <View style={styles.container}>
