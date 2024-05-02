@@ -5,11 +5,13 @@ import { texts } from "@styles/texts";
 import { styles } from "@styles/pages";
 import { homeBGUrl, logoUrl } from "./constants/images";
 import { Button } from "@components/button/button";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 //@ts-ignore
 import TextEncodingPolyfill from "text-encoding";
 import BigInt from "big-integer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { requestAuthToken } from "./services/request-access-token";
+import { getAccessToken } from "./utils/get-access-token";
 
 SplashScreen.preventAutoHideAsync();
 setTimeout(SplashScreen.hideAsync, 3000);
@@ -21,19 +23,24 @@ Object.assign(global, {
 });
 
 const Home = () => {
-  const [parameters, setParameters] = useState({ test: "oi" });
-
   useEffect(() => {
-    const handleURL = (event: any) => {
-      const { url } = event;
-      const params = new URLSearchParams(url);
-      //@ts-ignore
-      setParameters(params);
+    const checkAccessToken = async () => {
+      if (await getAccessToken()) {
+        router.replace("/pages/home");
+      }
     };
 
-    const subscription = Linking.addEventListener("url", handleURL);
+    checkAccessToken();
 
-    return () => subscription.remove();
+    Linking.addEventListener("url", async function (e) {
+      const url = new URL(e.url);
+      const codeParam = url.searchParams.get("code");
+
+      if (codeParam) {
+        await requestAuthToken(codeParam);
+        router.replace("/pages/home");
+      }
+    });
   }, []);
 
   return (
@@ -56,10 +63,6 @@ const Home = () => {
               Música é arte. Arte é emoção. O Emotify une tudo isso. Ouça suas
               músicas e registre sua história com elas.
             </Text>
-
-            {Object.entries(parameters).map(([key, value]) => (
-              <Text key={key} style={texts.text2}>{`${key}: ${value}`}</Text>
-            ))}
 
             <Link href="/pages/connect" asChild>
               <Button
