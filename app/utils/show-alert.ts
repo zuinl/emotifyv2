@@ -11,13 +11,15 @@ export const showAlert = ({
   cancelText,
   confirmText,
   cancelable,
+  showCancelButton,
+  showConfirmButton,
   onCancelPress,
   onConfirmPress,
   onDismiss,
 }: ShowAlertProps): void => {
   const buttons: AlertButton[] = [];
 
-  if (onCancelPress) {
+  if (showCancelButton) {
     buttons.push({
       text: cancelText ?? "Cancelar",
       onPress: onCancelPress,
@@ -25,7 +27,7 @@ export const showAlert = ({
     });
   }
 
-  if (onConfirmPress) {
+  if (showConfirmButton) {
     buttons.push({
       text: confirmText ?? "OK",
       onPress: onConfirmPress,

@@ -5,15 +5,29 @@ import { PlaylistCardProps } from "../../types/components/playlist-card";
 
 export const PlaylistCard = ({
   title,
-  duration,
+  totalTracks,
   imageUrl,
   onPress,
 }: PlaylistCardProps) => {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.7 : 1,
+        },
+        styles.container,
+      ]}
+      onPress={onPress}
+    >
       <Image source={{ uri: imageUrl }} style={styles.image} />
-      <Text style={[texts.text2, styles.songTitle]}>{title}</Text>
-      <Text style={texts.text4}>{duration}</Text>
+      <Text
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        style={[texts.text2, styles.title]}
+      >
+        {title}
+      </Text>
+      <Text style={texts.text4}>{totalTracks} faixas</Text>
     </Pressable>
   );
 };

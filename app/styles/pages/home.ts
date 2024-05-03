@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 20,
   },
-  scrollContainer: {
+  playlistsFlatlistContainer: {
     height: "auto",
     width: "100%",
     marginBottom: 28,

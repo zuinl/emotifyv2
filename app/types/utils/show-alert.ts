@@ -18,6 +18,16 @@ export type ShowAlertProps = {
    */
   confirmText?: string;
   /**
+   * Indica se o botão de cancelar deve ser exibido
+   * @default false
+   */
+  showCancelButton?: boolean;
+  /**
+   * Indica se o botão de confirmar deve ser exibido
+   * @default false
+   */
+  showConfirmButton?: boolean;
+  /**
    * Callback para o botão de cancelar/fechar.
    * Se não informado, o botão de cancelar é oculto.
    * @default undefined

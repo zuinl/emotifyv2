@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { BaseLayoutProvider } from "@contexts/base-layout.context";
 import { texts } from "@styles/texts";
 import { styles } from "@styles/pages/home";
@@ -6,15 +6,13 @@ import { Header } from "../components/header/header";
 import { TabMenu } from "../components/tab-menu/tab-menu";
 import { useHomePage } from "../containers/use-home-page";
 import { PlaylistCard } from "../components/playlist-card/playlist-card";
-import { homeBGUrl } from "../constants/images";
 import { SongChip } from "../components/song-chip/song-chip";
 
 import mkSongs from "../assets/mocks/songs.json";
-import { useGetPlaylists } from "@services/get-playlists";
 
 const Home = () => {
-  const { tab, onTabChange } = useHomePage();
-  const { data, error } = useGetPlaylists();
+  const { tab, onTabChange, playlists } = useHomePage();
+
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
       <View style={styles.container}>
@@ -25,28 +23,21 @@ const Home = () => {
           <View>
             <Text style={texts.title3}>Suas playlists</Text>
 
-            <View style={styles.scrollContainer}>
-              <ScrollView contentContainerStyle={styles.playlistsContainer}>
+            <FlatList
+              data={playlists}
+              renderItem={({ item }) => (
                 <PlaylistCard
-                  title="bad guy"
-                  duration="1h43"
+                  title={item.name}
+                  imageUrl={item.images[0].url}
+                  totalTracks={item.tracks.total}
                   onPress={() => {}}
-                  imageUrl={homeBGUrl}
                 />
-                <PlaylistCard
-                  title="bad guy"
-                  duration="1h43"
-                  onPress={() => {}}
-                  imageUrl={homeBGUrl}
-                />
-                <PlaylistCard
-                  title="bad guy"
-                  duration="1h43"
-                  onPress={() => {}}
-                  imageUrl={homeBGUrl}
-                />
-              </ScrollView>
-            </View>
+              )}
+              keyExtractor={({ id }) => String(id)}
+              horizontal
+              style={styles.playlistsFlatlistContainer}
+              contentContainerStyle={styles.playlistsContainer}
+            />
 
             <Text style={texts.title3}>Mais ouvidas</Text>
             <View style={styles.songListContainer}>
