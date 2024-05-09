@@ -44,7 +44,7 @@ const Home = () => {
   }, []);
 
   return (
-    <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
+    <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }} noPlayingFooter>
       <ImageBackground
         source={{
           uri: homeBGUrl,
