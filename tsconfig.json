@@ -12,7 +12,7 @@
       "@containers/*": ["./app/containers/*"],
       "@pages/*": ["./app/pages/*"],
       "@utils/*": ["./app/utils/*"],
-      "@hooks/*": ["./app/hooks/*"],
+      "@hooks/*": ["./app/hooks/*"]
     }
   }
 }

@@ -5,11 +5,14 @@ import { styles } from "@styles/pages/connect";
 import { logoUrl, welcomeBgUrl } from "../constants/images";
 import { Button } from "@components/button/button";
 import { Link } from "expo-router";
-import {requestAuth} from "@services/request-auth"
+import { requestAuth } from "@services/request-auth";
 
 const Home = () => {
   return (
-    <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }} noPlayingFooter>
+    <BaseLayoutProvider
+      baseViewProps={{ style: { padding: 0 } }}
+      noPlayingFooter
+    >
       <ImageBackground
         source={{
           uri: welcomeBgUrl,
@@ -22,13 +25,13 @@ const Home = () => {
           </View>
           <View style={styles.contentContainer}>
             {/* <Link href="/pages/home" asChild> */}
-              <Button
-                text="Conectar agora"
-                onPress={requestAuth}
-                variant="secondary"
-                fill="ghost"
-                customStyle={{ marginTop: 80 }}
-              />
+            <Button
+              text="Conectar agora"
+              onPress={requestAuth}
+              variant="secondary"
+              fill="ghost"
+              customStyle={{ marginTop: 80 }}
+            />
             {/* </Link> */}
             <Text style={[texts.text2, { textAlign: "center" }]}>
               O Emotify precisa se conectar à sua conta do Spotify para

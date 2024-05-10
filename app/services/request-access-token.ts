@@ -1,12 +1,19 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAccessToken } from "../utils/get-access-token";
-import { accessTokenIdentifier, authBaseAPI, clientID, expiresTokenIdentifier, redirectUrl, refreshTokenIdentifier } from "../utils/constants";
+import {
+  accessTokenIdentifier,
+  authBaseAPI,
+  clientID,
+  expiresTokenIdentifier,
+  redirectUrl,
+  refreshTokenIdentifier,
+} from "../utils/constants";
 
 /**
  * Método reúne os dados para fazer a requisição do Token de acesso
  * @param code O código recebido via parâmetro após aprovação do usuário no navegador
  */
-export const requestAuthToken = async (code: string):Promise<void> => {
+export const requestAuthToken = async (code: string): Promise<void> => {
   if (!code) return;
   if (await getAccessToken()) return;
 

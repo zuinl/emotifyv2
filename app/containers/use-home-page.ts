@@ -9,15 +9,15 @@ export const useHomePage = () => {
   const playlistsData = useGetPlaylists();
 
   useEffect(() => {
-    if(playlistsData.error) {
+    if (playlistsData.error) {
       showAlert({
         title: "Erro",
         message: "Houve um erro ao carregar as playlists",
         showCancelButton: true,
         cancelText: "OK",
-      })
+      });
     }
-  }, [playlistsData.error])
+  }, [playlistsData.error]);
 
   const onTabChange = (newTab: TabOptions) => setTab(newTab);
 
