@@ -9,9 +9,7 @@ type ResumePlaybackParams = {
   device_id?: string;
 };
 
-export const useResumePlayback = ({
-  device_id,
-}: ResumePlaybackParams) => {
+export const useResumePlayback = ({ device_id }: ResumePlaybackParams) => {
   const getResumePlaybackFetcher = async () => {
     return fetch(
       `${baseAPI}/me/player/play?` +

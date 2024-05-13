@@ -1,10 +1,8 @@
 export type SongChipProps = {
-  id: number;
+  id: string;
   title: string;
   artist: string;
   duration: string;
   liked: boolean;
-  playing: boolean;
-  onPress: (songId: number) => void;
-  toggleLike: (songId: number) => void;
+  toggleLike: (songId: string) => void;
 };

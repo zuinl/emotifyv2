@@ -17,6 +17,10 @@ export const styles = StyleSheet.create({
     flexWrap: "nowrap",
     gap: 16,
   },
+  songListFlatlistContainer: {
+    height: 280,
+    width: "100%",
+  },
   songListContainer: {
     width: "100%",
     gap: 12,

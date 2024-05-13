@@ -7,11 +7,10 @@ import { TabMenu } from "../components/tab-menu/tab-menu";
 import { useHomePage } from "../containers/use-home-page";
 import { PlaylistCard } from "../components/playlist-card/playlist-card";
 import { SongChip } from "../components/song-chip/song-chip";
-
-import mkSongs from "../assets/mocks/songs.json";
+import { transformDuration } from "../utils/transform-duration";
 
 const Home = () => {
-  const { tab, onTabChange, playlists } = useHomePage();
+  const { tab, onTabChange, playlists, topSongs } = useHomePage();
 
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
@@ -40,19 +39,24 @@ const Home = () => {
             />
 
             <Text style={texts.title3}>Mais ouvidas</Text>
-            <View style={styles.songListContainer}>
-              <FlatList
-                data={mkSongs}
-                renderItem={({ item }) => (
+            <FlatList
+              data={topSongs}
+              renderItem={({ item }) => {
+                return (
                   <SongChip
-                    {...item}
-                    onPress={() => {}}
+                    id={item.id}
+                    title={item.name}
+                    artist={item.artists[0].name}
+                    duration={transformDuration(item.duration_ms)}
+                    liked={false}
                     toggleLike={() => {}}
                   />
-                )}
-                keyExtractor={(item) => String(item.id)}
-              />
-            </View>
+                );
+              }}
+              keyExtractor={(item) => String(item.id)}
+              style={styles.songListFlatlistContainer}
+              contentContainerStyle={styles.songListContainer}
+            />
           </View>
         )}
       </View>

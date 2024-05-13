@@ -4,22 +4,36 @@ import { Pressable, Text, View } from "react-native";
 import { colors } from "@styles/colors";
 import { texts } from "../../styles/texts";
 import { SongChipProps } from "../../types/components/song-chip";
+import { useContext } from "react";
+import { BaseLayoutContext } from "../../contexts/base-layout.context";
 
 export const SongChip = ({
   id,
   title,
   artist,
   duration,
-  playing,
   liked,
-  onPress,
   toggleLike,
 }: SongChipProps) => {
+  const { isPlaying, isTrackPlaying, onSongPress } =
+    useContext(BaseLayoutContext);
+  const playing = isTrackPlaying(id);
+
+  let iconName = "";
+  if (playing && isPlaying) {
+    iconName = "pause";
+  } else if (playing && !isPlaying) {
+    iconName = "play";
+  } else {
+    iconName = "play";
+  }
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => onPress(id)} style={styles.playContainer}>
+      <Pressable onPress={() => onSongPress(id)} style={styles.playContainer}>
         <Ionicons
-          name={playing ? "pause" : "play"}
+          //@ts-ignore
+          name={iconName}
           size={20}
           color={playing ? colors.primary : colors.lightGrey}
         />
