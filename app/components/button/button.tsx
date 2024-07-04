@@ -24,6 +24,7 @@ export const Button = ({
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       onLongPress={onLongPress}
+      testID="button-pressable"
     >
       <Text style={styles.text}>{text}</Text>
     </Pressable>

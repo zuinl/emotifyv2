@@ -18,7 +18,7 @@ export const PlayingFooter = ({
 }: PlayingFooterProps) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: songImageUrl }} style={styles.songImage} />
+      <Image source={{ uri: songImageUrl }} style={styles.songImage} testID="song-image" />
 
       <View style={styles.songTitleContainer}>
         <Text style={[texts.text3, { fontWeight: "500" }]}>{songTitle}</Text>
