@@ -12,10 +12,16 @@ export const Tab = ({ onPress, text, active }: TabProps) => {
           styles.tabText,
           active ? styles.tabTextActive : null,
         ]}
+        testID="tab-text"
       >
         {text}
       </Text>
-      {active && <View style={styles.activeIndicator}></View>}
+      {active && (
+        <View
+          style={styles.activeIndicator}
+          testID="tab-active-indicator"
+        ></View>
+      )}
     </Pressable>
   );
 };
