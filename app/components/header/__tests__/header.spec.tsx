@@ -13,8 +13,8 @@ describe("component: Header", () => {
         onSearchPress={onSearchPressFn}
       />,
     );
-    const optionsBtn = screen.getByTestId("options-button")
-    const searchBtn = screen.getByTestId("search-button")
+    const optionsBtn = screen.getByTestId("options-button");
+    const searchBtn = screen.getByTestId("search-button");
 
     const user = getUserEvent();
 

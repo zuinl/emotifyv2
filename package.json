@@ -66,7 +66,8 @@
       "!**/babel.config.js",
       "!app/constants/**",
       "!app/styles/**",
-      "!app/types/**"
+      "!app/types/**",
+      "!app/tests/*"
     ]
   }
 }

@@ -13,7 +13,7 @@ export const SongChip = ({
   artist,
   duration,
   liked,
-  toggleLike,
+  onToggleLike,
 }: SongChipProps) => {
   const { isPlaying, isTrackPlaying, onSongPress } =
     useContext(BaseLayoutContext);
@@ -30,7 +30,11 @@ export const SongChip = ({
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => onSongPress(id)} style={styles.playContainer}>
+      <Pressable
+        onPress={() => onSongPress(id)}
+        style={styles.playContainer}
+        testID="song-chip-button"
+      >
         <Ionicons
           //@ts-ignore
           name={iconName}
@@ -39,11 +43,20 @@ export const SongChip = ({
         />
       </Pressable>
       <View style={styles.songTitleContainer}>
-        <Text style={texts.text2}>{title}</Text>
-        <Text style={texts.text4}>{artist}</Text>
+        <Text style={texts.text2} testID="song-title">
+          {title}
+        </Text>
+        <Text style={texts.text4} testID="artist-name">
+          {artist}
+        </Text>
       </View>
-      <Text style={texts.text2}>{duration}</Text>
-      <Pressable onPress={() => toggleLike(id)}>
+      <Text style={texts.text2} testID="song-duration">
+        {duration}
+      </Text>
+      <Pressable
+        onPress={() => onToggleLike(id)}
+        testID="song-chip-like-button"
+      >
         <Ionicons
           name="heart"
           size={22}

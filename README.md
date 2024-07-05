@@ -5,6 +5,7 @@ Emotify is a **personal open source project** built with React Native for Androi
 When ready, the app will be published in Google Play Store and Apple App Store for free and ad-free.
 
 ## Technologies
+
 - React Native;
 - TypeScript;
 - Expo;

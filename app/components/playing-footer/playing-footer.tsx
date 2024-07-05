@@ -18,11 +18,19 @@ export const PlayingFooter = ({
 }: PlayingFooterProps) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: songImageUrl }} style={styles.songImage} testID="song-image" />
+      <Image
+        source={{ uri: songImageUrl }}
+        style={styles.songImage}
+        testID="song-image"
+      />
 
       <View style={styles.songTitleContainer}>
-        <Text style={[texts.text3, { fontWeight: "500" }]} testID="song-title">{songTitle}</Text>
-        <Text style={texts.text4} testID="artist-name">{songArtistName}</Text>
+        <Text style={[texts.text3, { fontWeight: "500" }]} testID="song-title">
+          {songTitle}
+        </Text>
+        <Text style={texts.text4} testID="artist-name">
+          {songArtistName}
+        </Text>
         <View style={styles.progressBarContainer}>
           <View
             style={[
@@ -34,7 +42,11 @@ export const PlayingFooter = ({
           </View>
         </View>
       </View>
-      <Pressable onPress={onPlayClick} style={styles.playContainer} testID="play-pause-button">
+      <Pressable
+        onPress={onPlayClick}
+        style={styles.playContainer}
+        testID="play-pause-button"
+      >
         <Ionicons
           name={playing ? "pause" : "play"}
           color={colors.black}

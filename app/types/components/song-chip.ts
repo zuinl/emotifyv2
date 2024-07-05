@@ -4,5 +4,5 @@ export type SongChipProps = {
   artist: string;
   duration: string;
   liked: boolean;
-  toggleLike: (songId: string) => void;
+  onToggleLike: (songId: string) => void;
 };

@@ -18,16 +18,24 @@ export const PlaylistCard = ({
         styles.container,
       ]}
       onPress={onPress}
+      testID="playlist-card-button"
     >
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image
+        source={{ uri: imageUrl }}
+        style={styles.image}
+        testID="playlist-image"
+      />
       <Text
         numberOfLines={1}
         ellipsizeMode="tail"
         style={[texts.text2, styles.title]}
+        testID="playlist-title"
       >
         {title}
       </Text>
-      <Text style={texts.text4}>{totalTracks} faixas</Text>
+      <Text style={texts.text4} testID="playlist-length">
+        {totalTracks} faixas
+      </Text>
     </Pressable>
   );
 };
