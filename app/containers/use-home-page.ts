@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { TabOptions } from "@tps/components/tab-menu";
 import { useGetPlaylists } from "@services/get-playlists";
-import { showAlert } from "../utils/show-alert";
-import { useGetTopSongs } from "../services/get-top-songs";
+import { showAlert } from "@utils/show-alert";
+import { useGetTopSongs } from "@services/get-top-songs";
+import { UseHomePageParams } from "@tps/containers/use-home-page";
 
-export const useHomePage = () => {
+export const useHomePage = ({ limit }: UseHomePageParams) => {
   const [tab, setTab] = useState<TabOptions>("now");
 
-  const playlistsData = useGetPlaylists();
+  const playlistsData = useGetPlaylists(limit);
   const topSongsData = useGetTopSongs();
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import "@testing-library/react-native/extend-expect";
-import { server } from "./app/tests/server";
+import { server } from "./app/tests/node";
 
 jest.useFakeTimers();
 
