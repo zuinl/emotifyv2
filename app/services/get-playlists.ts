@@ -3,10 +3,11 @@ import { baseAPI } from "../utils/constants";
 import { getAccessToken } from "../utils/get-access-token";
 import { GetPlaylistsDTO } from "../types/services/get-playlists.dto";
 
-export const useGetPlaylists = () => {
+export const useGetPlaylists = (limit?: string) => {
   const getPlaylistsFetcher = async () => {
     return fetch(
-      `${baseAPI}/me/playlists?` + new URLSearchParams({ limit: "30" }),
+      `${baseAPI}/me/playlists?` +
+        new URLSearchParams({ limit: limit ?? "30" }),
       {
         method: "GET",
         headers: {
