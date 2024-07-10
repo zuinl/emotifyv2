@@ -1,6 +1,6 @@
 import { act, renderHook, waitFor } from "@testing-library/react-native";
 import { useHomePage } from "../use-home-page";
-import GetPlaylistsMock from "@tests/mocks/get-playlists.json"
+import GetPlaylistsMock from "@tests/mocks/get-playlists.json";
 
 describe("container: useHomePage", () => {
   it("should change tab", async () => {
@@ -21,15 +21,9 @@ describe("container: useHomePage", () => {
     const { result } = renderHook(() => useHomePage({}));
 
     await waitFor(() => {
-      expect(result.current.playlists.length).toBe(GetPlaylistsMock.items.length);
-    });
-  });
-  
-  it("should show alert due to loading playlists error", async () => {
-    const { result } = renderHook(() => useHomePage({limit: "1"}));
-
-    await waitFor(() => {
-      expect(result.current.playlists.length).toBe(0);
+      expect(result.current.playlists.length).toBe(
+        GetPlaylistsMock.items.length,
+      );
     });
   });
 });

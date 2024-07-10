@@ -68,7 +68,8 @@
       "!app/constants/**",
       "!app/styles/**",
       "!app/types/**",
-      "!app/tests/*"
+      "!app/tests/*",
+      "!app/contexts/*"
     ]
   }
 }

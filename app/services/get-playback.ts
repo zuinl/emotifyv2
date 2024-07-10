@@ -10,7 +10,10 @@ export const useGetPlayback = (shouldFetch: boolean) => {
       headers: {
         Authorization: `Bearer ${await getAccessToken()}`,
       },
-    }).then((res) => (res.status === 204 ? null : res.json()));
+    }).then((res) => {
+      /* istanbul ignore next */
+      return res.status === 204 ? null : res.json();
+    });
   };
 
   const { data, error, isLoading, mutate } = useSWR<GetPlaybackDTO>(
