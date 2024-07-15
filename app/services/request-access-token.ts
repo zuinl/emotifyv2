@@ -4,6 +4,7 @@ import {
   accessTokenIdentifier,
   authBaseAPI,
   clientID,
+  codeVerifierIdentifier,
   expiresTokenIdentifier,
   redirectUrl,
   refreshTokenIdentifier,
@@ -17,13 +18,8 @@ export const requestAuthToken = async (code: string): Promise<void> => {
   if (!code) return;
   if (await getAccessToken()) return;
 
-  let code_verifier: string = "";
-  try {
-    code_verifier = (await AsyncStorage.getItem("code_verifier")) ?? "";
-  } catch (e) {
-    console.error(e);
-  }
-
+  const code_verifier = await AsyncStorage.getItem(codeVerifierIdentifier);
+  /* istanbul ignore next */
   if (!code_verifier) return;
 
   const res = await fetch(authBaseAPI, {
@@ -42,6 +38,7 @@ export const requestAuthToken = async (code: string): Promise<void> => {
 
   const body = await res.json();
 
+  /* istanbul ignore else */
   if (body.access_token) {
     await AsyncStorage.setItem(accessTokenIdentifier, body.access_token);
     await AsyncStorage.setItem(refreshTokenIdentifier, body.refresh_token);

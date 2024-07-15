@@ -1,5 +1,6 @@
 export const accessTokenIdentifier = "spotify_access_token";
 export const refreshTokenIdentifier = "spotify_refresh_token";
+export const codeVerifierIdentifier = "code_verifier";
 export const expiresTokenIdentifier = "spotify_access_token_expires";
 export const authBaseAPI = "https://accounts.spotify.com/api/token";
 export const clientID = "2eead9133c1f412f8c482c17992adfbe";

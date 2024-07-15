@@ -10,12 +10,12 @@ import { SongChip } from "../components/song-chip/song-chip";
 import { transformDuration } from "../utils/transform-duration";
 
 const Home = () => {
-  const { tab, onTabChange, playlists, topSongs } = useHomePage();
+  const { tab, onTabChange, playlists, topSongs } = useHomePage({});
 
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
       <View style={styles.container}>
-        <Header />
+        <Header onSearchPress={() => {}} onOptionsPress={() => {}} />
         <TabMenu activeTab={tab} onTabPress={onTabChange} />
 
         {tab === "now" && (
@@ -49,7 +49,7 @@ const Home = () => {
                     artist={item.artists[0].name}
                     duration={transformDuration(item.duration_ms)}
                     liked={false}
-                    toggleLike={() => {}}
+                    onToggleLike={() => {}}
                   />
                 );
               }}

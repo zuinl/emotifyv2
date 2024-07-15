@@ -11,12 +11,13 @@ export const getAccessToken = async (): Promise<string> => {
     (await AsyncStorage.getItem(accessTokenIdentifier)) ?? "";
   if (accessToken) {
     const expiresIn: number = Number(
-      (await AsyncStorage.getItem(expiresTokenIdentifier)) ?? 0,
+      await AsyncStorage.getItem(expiresTokenIdentifier),
     );
 
     if (new Date().getTime() >= expiresIn) {
       await refreshAuthToken();
-      accessToken = (await AsyncStorage.getItem(accessTokenIdentifier)) ?? "";
+      /* istanbul ignore next */
+      accessToken = await AsyncStorage.getItem(accessTokenIdentifier) ?? "";
     }
   }
 

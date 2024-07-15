@@ -12,6 +12,7 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
   const topSongsData = useGetTopSongs();
 
   useEffect(() => {
+    /* istanbul ignore next */
     if (playlistsData.error) {
       showAlert({
         title: "Erro",

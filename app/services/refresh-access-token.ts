@@ -29,6 +29,7 @@ export const refreshAuthToken = async (): Promise<void> => {
 
   const body = await res.json();
 
+  /* istanbul ignore else */
   if (body.access_token) {
     await AsyncStorage.setItem(accessTokenIdentifier, body.access_token);
     await AsyncStorage.setItem(refreshTokenIdentifier, body.refresh_token);

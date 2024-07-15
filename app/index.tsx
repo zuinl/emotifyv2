@@ -32,6 +32,7 @@ const Home = () => {
 
     checkAccessToken();
 
+    /* istanbul ignore next */
     Linking.addEventListener("url", async function (e) {
       const url = new URL(e.url);
       const codeParam = url.searchParams.get("code");

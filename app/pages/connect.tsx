@@ -4,10 +4,9 @@ import { texts } from "@styles/texts";
 import { styles } from "@styles/pages/connect";
 import { logoUrl, welcomeBgUrl } from "../constants/images";
 import { Button } from "@components/button/button";
-import { Link } from "expo-router";
 import { requestAuth } from "@services/request-auth";
 
-const Home = () => {
+const Connect = () => {
   return (
     <BaseLayoutProvider
       baseViewProps={{ style: { padding: 0 } }}
@@ -21,10 +20,13 @@ const Home = () => {
       >
         <View style={styles.container}>
           <View style={styles.logoContainer}>
-            <Image source={{ uri: logoUrl }} style={styles.logo} />
+            <Image
+              source={{ uri: logoUrl }}
+              style={styles.logo}
+              testID="logo-image"
+            />
           </View>
           <View style={styles.contentContainer}>
-            {/* <Link href="/pages/home" asChild> */}
             <Button
               text="Conectar agora"
               onPress={requestAuth}
@@ -32,12 +34,17 @@ const Home = () => {
               fill="ghost"
               customStyle={{ marginTop: 80 }}
             />
-            {/* </Link> */}
-            <Text style={[texts.text2, { textAlign: "center" }]}>
+            <Text
+              style={[texts.text2, { textAlign: "center" }]}
+              testID="page-title"
+            >
               O Emotify precisa se conectar à sua conta do Spotify para
               iniciarmos sua jornada
             </Text>
-            <Text style={[texts.text4, { textAlign: "center" }]}>
+            <Text
+              style={[texts.text4, { textAlign: "center" }]}
+              testID="page-description"
+            >
               Você precisa de uma conta Spotify Premium
             </Text>
           </View>
@@ -47,4 +54,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Connect;

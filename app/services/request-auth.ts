@@ -15,11 +15,7 @@ export const requestAuth = async () => {
     "user-read-playback-state user-modify-playback-state user-read-currently-playing streaming playlist-read-private user-top-read user-read-recently-played user-library-read";
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
-  try {
-    await AsyncStorage.setItem("code_verifier", codeVerifier);
-  } catch (e) {
-    console.error(e);
-  }
+  await AsyncStorage.setItem("code_verifier", codeVerifier);
 
   const params = {
     response_type: "code",
@@ -31,11 +27,7 @@ export const requestAuth = async () => {
   };
 
   authUrl.search = new URLSearchParams(params).toString();
-  try {
-    Linking.openURL(authUrl.toString());
-  } catch (e) {
-    console.error(`Erro ao solicitar permissão: ${e}`);
-  }
+  Linking.openURL(authUrl.toString());
 };
 
 const generateRandomString = (length: number) => {
