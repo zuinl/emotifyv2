@@ -39,4 +39,7 @@ export const handlers = [
   http.put(`${baseAPI}/me/player/play`, () => {
     return HttpResponse.json(null, { status: 200 });
   }),
+  http.get(`${baseAPI}/me/tracks/contains`, () => {
+    return HttpResponse.json([true, false], { status: 200 });
+  }),
 ];
