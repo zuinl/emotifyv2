@@ -4,12 +4,16 @@ import { useGetPlaylists } from "@services/get-playlists";
 import { showAlert } from "@utils/show-alert";
 import { useGetTopSongs } from "@services/get-top-songs";
 import { UseHomePageParams } from "@tps/containers/use-home-page";
+import { useCheckedSavedSongs } from "@services/check-saved-songs";
 
 export const useHomePage = ({ limit }: UseHomePageParams) => {
   const [tab, setTab] = useState<TabOptions>("now");
+  const [savedSongsIds, setSavedSongsIds] = useState<string[]>([]);
+  const [listedSongsIds, setListedSongsIds] = useState<string[]>([]);
 
   const playlistsData = useGetPlaylists(limit);
   const topSongsData = useGetTopSongs();
+  const savedSongsData = useCheckedSavedSongs(listedSongsIds);
 
   useEffect(() => {
     /* istanbul ignore next */
@@ -23,6 +27,31 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
     }
   }, [playlistsData.error]);
 
+  useEffect(() => {
+    if (topSongsData.data) {
+      setListedSongsIds((prev) => [
+        ...prev,
+        ...(topSongsData.data?.items.map((topSong) => topSong.id) ?? []),
+      ]);
+    }
+  }, [topSongsData.data]);
+
+  useEffect(() => {
+    if (savedSongsData.data) {
+      const savedSongs: string[] = savedSongsData.songsIds.filter((_, idx) => {
+        if (savedSongsData.data && savedSongsData.data[idx] === true) return true;
+        return false;
+      });
+      setSavedSongsIds((prev) => [...prev, ...savedSongs]);
+    }
+  }, [savedSongsData.data]);
+
+  useEffect(() => {
+    if(listedSongsIds.length > 0) {
+      savedSongsData.mutate(undefined);
+    }
+  }, [listedSongsIds])
+
   const onTabChange = (newTab: TabOptions) => setTab(newTab);
 
   return {
@@ -32,5 +61,6 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
     loadingPlaylists: playlistsData.isLoading,
     topSongs: topSongsData.data?.items,
     topSongsLoading: topSongsData.isLoading,
+    savedSongsIds,
   };
 };

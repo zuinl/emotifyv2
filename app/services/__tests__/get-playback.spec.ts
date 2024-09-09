@@ -9,7 +9,7 @@ describe("service: useGetPlayback", () => {
       expect(result.current.data?.device).toBeDefined();
     });
   });
-  
+
   it("should NOT request", async () => {
     const { result } = renderHook(() => useGetPlayback(false));
 

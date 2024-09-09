@@ -10,7 +10,7 @@ describe("service: requestAuthToken", () => {
 
     expect(requestAuthToken("some_code")).resolves.not.toThrow();
   });
-  
+
   it("should interrupt due to lack of code", async () => {
     await AsyncStorage.setItem(codeVerifierIdentifier, "some_code");
 
@@ -20,7 +20,7 @@ describe("service: requestAuthToken", () => {
     //@ts-expect-error o teste necessita do tipo errado
     expect(requestAuthToken(undefined)).resolves.not.toThrow();
   });
-  
+
   it("should interrupt due to lack of code verifier", async () => {
     await AsyncStorage.removeItem(codeVerifierIdentifier);
 

@@ -10,7 +10,7 @@ import { SongChip } from "../components/song-chip/song-chip";
 import { transformDuration } from "../utils/transform-duration";
 
 const Home = () => {
-  const { tab, onTabChange, playlists, topSongs } = useHomePage({});
+  const { tab, onTabChange, playlists, topSongs, savedSongsIds } = useHomePage({});
 
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
@@ -48,7 +48,7 @@ const Home = () => {
                     title={item.name}
                     artist={item.artists[0].name}
                     duration={transformDuration(item.duration_ms)}
-                    liked={false}
+                    liked={savedSongsIds.includes(item.id)}
                     onToggleLike={() => {}}
                   />
                 );

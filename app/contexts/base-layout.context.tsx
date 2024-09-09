@@ -3,11 +3,11 @@ import { createContext, useEffect, useState } from "react";
 import { BaseLayoutProviderProps } from "@tps/contexts/base-layout.context";
 import { BaseLayout } from "@components/base-layout/base-layout";
 import { PlayingFooter } from "@components/playing-footer/playing-footer";
-import { useGetPlayback } from "../services/get-playback";
-import { calculatePercent } from "../utils/calculate-percent";
-import { usePausePlayback } from "../services/pause-playback";
-import { useResumePlayback } from "../services/resume-playback";
-import { useStartPlayback } from "../services/start-playback";
+import { useGetPlayback } from "@services/get-playback";
+import { calculatePercent } from "@utils/calculate-percent";
+import { usePausePlayback } from "@services/pause-playback";
+import { useResumePlayback } from "@services/resume-playback";
+import { useStartPlayback } from "@services/start-playback";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;

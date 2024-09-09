@@ -17,7 +17,7 @@ export const getAccessToken = async (): Promise<string> => {
     if (new Date().getTime() >= expiresIn) {
       await refreshAuthToken();
       /* istanbul ignore next */
-      accessToken = await AsyncStorage.getItem(accessTokenIdentifier) ?? "";
+      accessToken = (await AsyncStorage.getItem(accessTokenIdentifier)) ?? "";
     }
   }
 

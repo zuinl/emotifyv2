@@ -1,5 +1,5 @@
 {
-    "access_token": "base64_access_token",
-    "refresh_token": "base64_refresh_token",
-    "expires_in": 3600
+  "access_token": "base64_access_token",
+  "refresh_token": "base64_refresh_token",
+  "expires_in": 3600
 }

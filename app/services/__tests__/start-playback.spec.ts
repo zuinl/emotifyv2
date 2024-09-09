@@ -15,11 +15,9 @@ describe("service: useResumePlayback", () => {
       expect(result.current.data).toBeGreaterThanOrEqual(200);
     });
   });
-  
+
   it("should return successfully response - no device_id", async () => {
-    const { result } = renderHook(() =>
-      useStartPlayback({ id: "123" }),
-    );
+    const { result } = renderHook(() => useStartPlayback({ id: "123" }));
 
     act(() => {
       result.current.trigger();
