@@ -4,4 +4,5 @@ export type SongChipProps = {
   artist: string;
   duration: string;
   liked: boolean;
+  onLikeChangeCallback: (songId: string) => void;
 };

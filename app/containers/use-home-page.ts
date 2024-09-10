@@ -55,6 +55,16 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
 
   const onTabChange = (newTab: TabOptions) => setTab(newTab);
 
+  const onLikeChangeCallback = (songId: string): void => {
+    if (savedSongsIds.includes(songId)) {
+      setSavedSongsIds((prev) =>
+        prev.filter((savedSongId) => savedSongId !== songId),
+      );
+    } else {
+      setSavedSongsIds((prev) => [...prev, songId]);
+    }
+  };
+
   return {
     tab,
     onTabChange,
@@ -63,5 +73,6 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
     topSongs: topSongsData.data?.items,
     topSongsLoading: topSongsData.isLoading,
     savedSongsIds,
+    onLikeChangeCallback,
   };
 };

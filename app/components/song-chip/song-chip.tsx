@@ -13,6 +13,7 @@ export const SongChip = ({
   artist,
   duration,
   liked,
+  onLikeChangeCallback,
 }: SongChipProps) => {
   const {
     isPlaying,
@@ -61,7 +62,13 @@ export const SongChip = ({
       <Text style={texts.text2} testID="song-duration">
         {duration}
       </Text>
-      <Pressable onPress={() => onLikePress()} testID="song-chip-like-button">
+      <Pressable
+        onPress={() => {
+          onLikePress();
+          onLikeChangeCallback(id);
+        }}
+        testID="song-chip-like-button"
+      >
         <Ionicons
           name="heart"
           size={22}
