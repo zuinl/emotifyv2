@@ -12,6 +12,7 @@ import { useSaveSongs } from "../services/save-songs";
 import { useRemoveSongs } from "../services/remove-songs";
 import { useSetRepeatMode } from "../services/set-repeat-state";
 import { RepeatState } from "../types/services/common";
+import { useToggleShuffleState } from "../services/toggle-shuffle-state";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;
@@ -37,6 +38,9 @@ export const BaseLayoutProvider = ({
   const [repeatMode, setRepeatMode] = useState<RepeatState>(
     playerData.data?.repeat_state ?? "off",
   );
+  const [shuffle, setShuffle] = useState<boolean>(
+    playerData.data?.shuffle_state ?? false,
+  );
   const startData = useStartPlayback({
     device_id: playerData.data?.device.id,
     id: trackIdToPlay,
@@ -46,6 +50,7 @@ export const BaseLayoutProvider = ({
   });
   const pauseData = usePausePlayback(playerData.data?.device.id);
   const repeatData = useSetRepeatMode(repeatMode);
+  const shuffleData = useToggleShuffleState(shuffle);
   const saveSongsData = useSaveSongs([trackIdToSave]);
   const removeSongsData = useRemoveSongs([trackIdToRemove]);
 
@@ -97,6 +102,10 @@ export const BaseLayoutProvider = ({
     setRepeatMode(newRepeatMode);
   };
 
+  const onShufflePress = (): void => {
+    setShuffle((prev) => !prev);
+  };
+
   useEffect(() => {
     if (trackIdToRemove) {
       removeSongsData.trigger();
@@ -114,6 +123,12 @@ export const BaseLayoutProvider = ({
       repeatData.trigger();
     }
   }, [repeatMode]);
+
+  useEffect(() => {
+    if (playerData.data && shuffle !== playerData.data.shuffle_state) {
+      shuffleData.trigger();
+    }
+  }, [shuffle]);
 
   return (
     <BaseLayoutContext.Provider
@@ -145,6 +160,7 @@ export const BaseLayoutProvider = ({
             shuffleState={playerData.data.shuffle_state}
             onPlayClick={onPlayClick}
             onRepeatPress={onRepeatModePress}
+            onShufflePress={onShufflePress}
             onArrowClick={() => {}}
           />
         )}

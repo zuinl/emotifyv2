@@ -20,6 +20,7 @@ export const PlayingFooter = ({
   onArrowClick,
   onPlayClick,
   onRepeatPress,
+  onShufflePress,
 }: PlayingFooterProps) => {
   let repeatIcon = "repeat";
   if (repeatState === "track") repeatIcon = "repeat-once";
@@ -86,7 +87,7 @@ export const PlayingFooter = ({
               size={32}
             />
           </Pressable>
-          <Pressable onPress={() => {}} testID="shuffle-button">
+          <Pressable onPress={onShufflePress} testID="shuffle-button">
             <Ionicons
               name="shuffle"
               color={shuffleState ? colors.primary : colors.lightGrey}

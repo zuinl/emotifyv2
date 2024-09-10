@@ -52,4 +52,9 @@ export type PlayingFooterProps = {
    * @returns void
    */
   onRepeatPress: () => void;
+  /**
+   * Callback para o toque no ícone de modo aleatório
+   * @returns void
+   */
+  onShufflePress: () => void;
 };
