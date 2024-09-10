@@ -12,7 +12,7 @@ export const requestAuth = async () => {
   const redirectUri = "exp://192.168.18.25:8081";
 
   const scope =
-    "user-read-playback-state user-modify-playback-state user-read-currently-playing streaming playlist-read-private user-top-read user-read-recently-played user-library-read";
+    "user-read-playback-state user-modify-playback-state user-read-currently-playing streaming playlist-read-private user-top-read user-read-recently-played user-library-read user-library-modify";
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
   await AsyncStorage.setItem("code_verifier", codeVerifier);

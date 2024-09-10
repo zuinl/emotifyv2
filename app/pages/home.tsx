@@ -10,7 +10,9 @@ import { SongChip } from "../components/song-chip/song-chip";
 import { transformDuration } from "../utils/transform-duration";
 
 const Home = () => {
-  const { tab, onTabChange, playlists, topSongs, savedSongsIds } = useHomePage({});
+  const { tab, onTabChange, playlists, topSongs, savedSongsIds } = useHomePage(
+    {},
+  );
 
   return (
     <BaseLayoutProvider baseViewProps={{ style: { padding: 0 } }}>
@@ -42,14 +44,14 @@ const Home = () => {
             <FlatList
               data={topSongs}
               renderItem={({ item }) => {
+                const isSongLiked = savedSongsIds.includes(item.id);
                 return (
                   <SongChip
                     id={item.id}
                     title={item.name}
                     artist={item.artists[0].name}
                     duration={transformDuration(item.duration_ms)}
-                    liked={savedSongsIds.includes(item.id)}
-                    onToggleLike={() => {}}
+                    liked={isSongLiked}
                   />
                 );
               }}

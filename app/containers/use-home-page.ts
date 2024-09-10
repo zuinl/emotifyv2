@@ -39,7 +39,8 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
   useEffect(() => {
     if (savedSongsData.data) {
       const savedSongs: string[] = savedSongsData.songsIds.filter((_, idx) => {
-        if (savedSongsData.data && savedSongsData.data[idx] === true) return true;
+        if (savedSongsData.data && savedSongsData.data[idx] === true)
+          return true;
         return false;
       });
       setSavedSongsIds((prev) => [...prev, ...savedSongs]);
@@ -47,10 +48,10 @@ export const useHomePage = ({ limit }: UseHomePageParams) => {
   }, [savedSongsData.data]);
 
   useEffect(() => {
-    if(listedSongsIds.length > 0) {
+    if (listedSongsIds.length > 0) {
       savedSongsData.mutate(undefined);
     }
-  }, [listedSongsIds])
+  }, [listedSongsIds]);
 
   const onTabChange = (newTab: TabOptions) => setTab(newTab);
 

@@ -8,11 +8,15 @@ import { calculatePercent } from "@utils/calculate-percent";
 import { usePausePlayback } from "@services/pause-playback";
 import { useResumePlayback } from "@services/resume-playback";
 import { useStartPlayback } from "@services/start-playback";
+import { useSaveSongs } from "../services/save-songs";
+import { useRemoveSongs } from "../services/remove-songs";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;
   isTrackPlaying: (trackId: string) => boolean;
   onSongPress: (trackId: string) => void;
+  onSaveLikePress: (trackId: string) => void;
+  onRemoveLikePress: (trackId: string) => void;
 };
 
 export const BaseLayoutContext = createContext<BaseLayoutContextValue>(
@@ -25,6 +29,8 @@ export const BaseLayoutProvider = ({
   noPlayingFooter,
 }: BaseLayoutProviderProps) => {
   const [trackIdToPlay, setTrackIdToPlay] = useState<string>("");
+  const [trackIdToSave, setTrackIdToSave] = useState<string>("");
+  const [trackIdToRemove, setTrackIdToRemove] = useState<string>("");
   const playerData = useGetPlayback(noPlayingFooter !== true);
   const startData = useStartPlayback({
     device_id: playerData.data?.device.id,
@@ -34,6 +40,8 @@ export const BaseLayoutProvider = ({
     device_id: playerData.data?.device.id,
   });
   const pauseData = usePausePlayback(playerData.data?.device.id);
+  const saveSongsData = useSaveSongs([trackIdToSave]);
+  const removeSongsData = useRemoveSongs([trackIdToRemove]);
 
   const isTrackPlaying = (trackId: string): boolean => {
     return playerData.data?.item.id === trackId;
@@ -64,12 +72,34 @@ export const BaseLayoutProvider = ({
     }
   };
 
+  const onRemoveLikePress = (songId: string): void => {
+    setTrackIdToRemove(songId);
+  };
+
+  const onSaveLikePress = (songId: string): void => {
+    setTrackIdToSave(songId);
+  };
+
+  useEffect(() => {
+    if (trackIdToRemove) {
+      removeSongsData.trigger();
+    }
+  }, [trackIdToRemove]);
+
+  useEffect(() => {
+    if (trackIdToSave) {
+      saveSongsData.trigger();
+    }
+  }, [trackIdToSave]);
+
   return (
     <BaseLayoutContext.Provider
       value={{
         isPlaying: playerData.data?.is_playing ?? false,
         isTrackPlaying,
         onSongPress,
+        onSaveLikePress,
+        onRemoveLikePress,
       }}
     >
       <StatusBar style="dark" />

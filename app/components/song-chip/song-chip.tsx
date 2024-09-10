@@ -13,10 +13,14 @@ export const SongChip = ({
   artist,
   duration,
   liked,
-  onToggleLike,
 }: SongChipProps) => {
-  const { isPlaying, isTrackPlaying, onSongPress } =
-    useContext(BaseLayoutContext);
+  const {
+    isPlaying,
+    isTrackPlaying,
+    onSongPress,
+    onRemoveLikePress,
+    onSaveLikePress,
+  } = useContext(BaseLayoutContext);
   const playing = isTrackPlaying(id);
 
   let iconName = "";
@@ -27,6 +31,10 @@ export const SongChip = ({
   } else {
     iconName = "play";
   }
+
+  const onLikePress = liked
+    ? () => onRemoveLikePress(id)
+    : () => onSaveLikePress(id);
 
   return (
     <View style={styles.container}>
@@ -53,10 +61,7 @@ export const SongChip = ({
       <Text style={texts.text2} testID="song-duration">
         {duration}
       </Text>
-      <Pressable
-        onPress={() => onToggleLike(id)}
-        testID="song-chip-like-button"
-      >
+      <Pressable onPress={() => onLikePress()} testID="song-chip-like-button">
         <Ionicons
           name="heart"
           size={22}
