@@ -10,6 +10,8 @@ import { useResumePlayback } from "@services/resume-playback";
 import { useStartPlayback } from "@services/start-playback";
 import { useSaveSongs } from "../services/save-songs";
 import { useRemoveSongs } from "../services/remove-songs";
+import { useSetRepeatMode } from "../services/set-repeat-state";
+import { RepeatState } from "../types/services/common";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;
@@ -32,6 +34,9 @@ export const BaseLayoutProvider = ({
   const [trackIdToSave, setTrackIdToSave] = useState<string>("");
   const [trackIdToRemove, setTrackIdToRemove] = useState<string>("");
   const playerData = useGetPlayback(noPlayingFooter !== true);
+  const [repeatMode, setRepeatMode] = useState<RepeatState>(
+    playerData.data?.repeat_state ?? "off",
+  );
   const startData = useStartPlayback({
     device_id: playerData.data?.device.id,
     id: trackIdToPlay,
@@ -40,6 +45,7 @@ export const BaseLayoutProvider = ({
     device_id: playerData.data?.device.id,
   });
   const pauseData = usePausePlayback(playerData.data?.device.id);
+  const repeatData = useSetRepeatMode(repeatMode);
   const saveSongsData = useSaveSongs([trackIdToSave]);
   const removeSongsData = useRemoveSongs([trackIdToRemove]);
 
@@ -80,6 +86,17 @@ export const BaseLayoutProvider = ({
     setTrackIdToSave(songId);
   };
 
+  const onRepeatModePress = (): void => {
+    let newRepeatMode: RepeatState = "off";
+    if (repeatMode === "context") {
+      newRepeatMode = "track";
+    } else if (repeatMode === "off") {
+      newRepeatMode = "context";
+    }
+
+    setRepeatMode(newRepeatMode);
+  };
+
   useEffect(() => {
     if (trackIdToRemove) {
       removeSongsData.trigger();
@@ -91,6 +108,12 @@ export const BaseLayoutProvider = ({
       saveSongsData.trigger();
     }
   }, [trackIdToSave]);
+
+  useEffect(() => {
+    if (playerData.data && repeatMode !== playerData.data.repeat_state) {
+      repeatData.trigger();
+    }
+  }, [repeatMode]);
 
   return (
     <BaseLayoutContext.Provider
@@ -118,7 +141,10 @@ export const BaseLayoutProvider = ({
             )}
             currentPosition={playerData.data.progress_ms}
             playing={playerData.data?.is_playing}
+            repeatState={playerData.data.repeat_state}
+            shuffleState={playerData.data.shuffle_state}
             onPlayClick={onPlayClick}
+            onRepeatPress={onRepeatModePress}
             onArrowClick={() => {}}
           />
         )}

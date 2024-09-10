@@ -1,3 +1,5 @@
+import { RepeatState } from "../services/common";
+
 export type PlayingFooterProps = {
   /**
    * Título da música
@@ -28,6 +30,14 @@ export type PlayingFooterProps = {
    */
   playing: boolean;
   /**
+   * O estado de repetição
+   */
+  repeatState: RepeatState;
+  /**
+   * Indica se está no modo aleatório
+   */
+  shuffleState: boolean;
+  /**
    * Callback para o toque no botão de play/pause
    * @returns void
    */
@@ -37,4 +47,9 @@ export type PlayingFooterProps = {
    * @returns void
    */
   onArrowClick: () => void;
+  /**
+   * Callback para o toque no ícone de repetição
+   * @returns void
+   */
+  onRepeatPress: () => void;
 };
