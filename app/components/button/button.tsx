@@ -1,6 +1,7 @@
-import { Text, Pressable } from "react-native";
+import { Text } from "react-native";
 import { makeStyles } from "@styles/components/button/styles";
 import { ButtonProps } from "@tps/components/button";
+import { CustomPressable } from "../custom-pressable/custom-pressable";
 
 export const Button = ({
   variant,
@@ -17,8 +18,8 @@ export const Button = ({
   const styles = makeStyles(variant, fill, customStyle, customTextStyle);
 
   return (
-    <Pressable
-      style={styles.container}
+    <CustomPressable
+      customStyles={styles.container}
       disabled={disabled}
       onPress={onPress}
       onPressIn={onPressIn}
@@ -27,6 +28,6 @@ export const Button = ({
       testID="button-pressable"
     >
       <Text style={styles.text}>{text}</Text>
-    </Pressable>
+    </CustomPressable>
   );
 };

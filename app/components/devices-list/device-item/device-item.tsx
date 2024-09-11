@@ -1,9 +1,10 @@
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { styles } from "@styles/components/devices-list/device-item/styles";
 import { colors } from "@styles/colors";
 import { DeviceItemProps } from "@tps/components/device-item";
 import { texts } from "@styles/texts";
+import { CustomPressable } from "../../custom-pressable/custom-pressable";
 
 export const DeviceItem = ({
   name,
@@ -24,7 +25,7 @@ export const DeviceItem = ({
       break;
   }
   return (
-    <Pressable onPress={onPress}>
+    <CustomPressable onPress={onPress}>
       <View style={styles.container}>
         {/* TODO: padronizar tamanho dos ícones */}
         <MaterialCommunityIcons
@@ -35,6 +36,6 @@ export const DeviceItem = ({
         />
         <Text style={texts.text2}>{name}</Text>
       </View>
-    </Pressable>
+    </CustomPressable>
   );
 };

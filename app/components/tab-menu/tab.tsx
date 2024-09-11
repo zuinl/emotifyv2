@@ -1,11 +1,12 @@
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "@styles/components/tab-menu/styles";
 import { texts } from "@styles/texts";
 import { TabProps } from "@tps/components/tab-menu";
+import { CustomPressable } from "../custom-pressable/custom-pressable";
 
 export const Tab = ({ onPress, text, active }: TabProps) => {
   return (
-    <Pressable onPress={onPress} style={styles.tabContainer}>
+    <CustomPressable onPress={onPress} customStyles={styles.tabContainer}>
       <Text
         style={[
           texts.text1,
@@ -22,6 +23,6 @@ export const Tab = ({ onPress, text, active }: TabProps) => {
           testID="tab-active-indicator"
         ></View>
       )}
-    </Pressable>
+    </CustomPressable>
   );
 };

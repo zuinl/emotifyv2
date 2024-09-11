@@ -1,7 +1,8 @@
-import { Image, Pressable, Text } from "react-native";
+import { Image, Text } from "react-native";
 import { styles } from "@styles/components/playlist-card/styles";
 import { texts } from "@styles/texts";
 import { PlaylistCardProps } from "../../types/components/playlist-card";
+import { CustomPressable } from "../custom-pressable/custom-pressable";
 
 export const PlaylistCard = ({
   title,
@@ -10,15 +11,10 @@ export const PlaylistCard = ({
   onPress,
 }: PlaylistCardProps) => {
   return (
-    <Pressable
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.7 : 1,
-        },
-        styles.container,
-      ]}
+    <CustomPressable
       onPress={onPress}
       testID="playlist-card-button"
+      customStyles={styles.container}
     >
       <Image
         source={{ uri: imageUrl }}
@@ -36,6 +32,6 @@ export const PlaylistCard = ({
       <Text style={texts.text4} testID="playlist-length">
         {totalTracks} faixas
       </Text>
-    </Pressable>
+    </CustomPressable>
   );
 };

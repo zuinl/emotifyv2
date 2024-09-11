@@ -1,9 +1,10 @@
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { styles } from "@styles/components/devices-list/styles";
 import { colors } from "@styles/colors";
 import { DevicesListProps } from "@tps/components/devices-list";
 import { texts } from "@styles/texts";
 import { DeviceItem } from "./device-item/device-item";
+import { CustomPressable } from "../custom-pressable/custom-pressable";
 
 export const DevicesList = ({
   devices,
@@ -22,9 +23,9 @@ export const DevicesList = ({
           keyExtractor={({ id }) => id}
           contentContainerStyle={styles.devicesContainer}
         />
-        <Pressable style={styles.closeContainer} onPress={onClose}>
+        <CustomPressable customStyles={styles.closeContainer} onPress={onClose}>
           <Text style={[texts.text2, { color: colors.secondary }]}>Fechar</Text>
-        </Pressable>
+        </CustomPressable>
       </View>
     </View>
   );

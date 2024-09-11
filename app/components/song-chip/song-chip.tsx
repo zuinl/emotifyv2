@@ -1,11 +1,12 @@
 import { styles } from "@styles/components/song-chip/song-chip";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { colors } from "@styles/colors";
 import { texts } from "../../styles/texts";
 import { SongChipProps } from "../../types/components/song-chip";
 import { useContext } from "react";
 import { BaseLayoutContext } from "../../contexts/base-layout.context";
+import { CustomPressable } from "../custom-pressable/custom-pressable";
 
 export const SongChip = ({
   id,
@@ -39,9 +40,9 @@ export const SongChip = ({
 
   return (
     <View style={styles.container}>
-      <Pressable
+      <CustomPressable
         onPress={() => onSongPress(id)}
-        style={styles.playContainer}
+        customStyles={styles.playContainer}
         testID="song-chip-button"
       >
         <Ionicons
@@ -50,7 +51,7 @@ export const SongChip = ({
           size={20}
           color={playing ? colors.primary : colors.lightGrey}
         />
-      </Pressable>
+      </CustomPressable>
       <View style={styles.songTitleContainer}>
         <Text style={texts.text2} testID="song-title">
           {title}
@@ -62,7 +63,7 @@ export const SongChip = ({
       <Text style={texts.text2} testID="song-duration">
         {duration}
       </Text>
-      <Pressable
+      <CustomPressable
         onPress={() => {
           onLikePress();
           onLikeChangeCallback(id);
@@ -75,7 +76,7 @@ export const SongChip = ({
           color={liked ? colors.primary : colors.darkGrey}
           style={styles.likeIcon}
         />
-      </Pressable>
+      </CustomPressable>
     </View>
   );
 };

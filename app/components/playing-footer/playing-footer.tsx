@@ -1,4 +1,4 @@
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -6,6 +6,7 @@ import { styles } from "@styles/components/playing-footer/styles";
 import { texts } from "@styles/texts";
 import { colors } from "@styles/colors";
 import { PlayingFooterProps } from "@tps/components/playing-footer";
+import { CustomPressable } from "../custom-pressable/custom-pressable";
 
 export const PlayingFooter = ({
   songTitle,
@@ -55,13 +56,13 @@ export const PlayingFooter = ({
                 { width: `${songPlayingProgress}%` },
               ]}
             >
-              <Pressable style={styles.progressCircle} />
+              <CustomPressable customStyles={styles.progressCircle} />
             </View>
           </View>
         </View>
-        <Pressable
+        <CustomPressable
           onPress={onPlayClick}
-          style={styles.playContainer}
+          customStyles={styles.playContainer}
           testID="play-pause-button"
         >
           <Ionicons
@@ -70,14 +71,14 @@ export const PlayingFooter = ({
             size={22}
             testID="play-pause-icon"
           />
-        </Pressable>
-        <Pressable onPress={onArrowClick} testID="expand-button">
+        </CustomPressable>
+        <CustomPressable onPress={onArrowClick} testID="expand-button">
           <Ionicons
             name={expanded ? "chevron-down" : "chevron-up"}
             color={colors.lightGrey}
             size={18}
           />
-        </Pressable>
+        </CustomPressable>
       </View>
       {expanded && (
         <View style={styles.expandedContainer}>
@@ -89,21 +90,21 @@ export const PlayingFooter = ({
             />
           </View>
           <View style={styles.expandedIconsContainer}>
-            <Pressable onPress={onPreviousPress} testID="previous-button">
+            <CustomPressable onPress={onPreviousPress} testID="previous-button">
               <Ionicons
                 name="play-skip-back"
                 color={colors.lightGrey}
                 size={32}
               />
-            </Pressable>
-            <Pressable onPress={onShufflePress} testID="shuffle-button">
+            </CustomPressable>
+            <CustomPressable onPress={onShufflePress} testID="shuffle-button">
               <Ionicons
                 name="shuffle"
                 color={shuffleState ? colors.primary : colors.lightGrey}
                 size={28}
               />
-            </Pressable>
-            <Pressable onPress={onRepeatPress} testID="repeat-button">
+            </CustomPressable>
+            <CustomPressable onPress={onRepeatPress} testID="repeat-button">
               <MaterialCommunityIcons
                 // @ts-expect-error ícone condicional
                 name={repeatIcon}
@@ -112,21 +113,21 @@ export const PlayingFooter = ({
                 }
                 size={28}
               />
-            </Pressable>
-            <Pressable onPress={onDevicesPress} testID="devices-button">
+            </CustomPressable>
+            <CustomPressable onPress={onDevicesPress} testID="devices-button">
               <MaterialIcons
                 name="devices-other"
                 color={colors.secondary}
                 size={28}
               />
-            </Pressable>
-            <Pressable onPress={onSkipPress} testID="next-button">
+            </CustomPressable>
+            <CustomPressable onPress={onSkipPress} testID="next-button">
               <Ionicons
                 name="play-skip-forward"
                 color={colors.lightGrey}
                 size={32}
               />
-            </Pressable>
+            </CustomPressable>
           </View>
         </View>
       )}
