@@ -66,4 +66,14 @@ export type PlayingFooterProps = {
    * @returns void
    */
   onDevicesPress: () => void;
+  /**
+   * Callback para o toque no ícone de próxima faixa
+   * @returns void
+   */
+  onSkipPress: () => void;
+  /**
+   * Callback para o toque no ícone de faixa anterior
+   * @returns void
+   */
+  onPreviousPress: () => void;
 };

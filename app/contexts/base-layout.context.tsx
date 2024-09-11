@@ -16,6 +16,8 @@ import { useToggleShuffleState } from "../services/toggle-shuffle-state";
 import { useGetDevices } from "../services/get-devices";
 import { DevicesList } from "@components/devices-list/devices-list";
 import { useTransferPlayback } from "../services/transfer-playback";
+import { useSkipPlayer } from "../services/skip-player";
+import { usePreviousPlayer } from "../services/previous-player";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;
@@ -68,6 +70,8 @@ export const BaseLayoutProvider = ({
   const removeSongsData = useRemoveSongs([trackIdToRemove]);
   const [deviceIdToTransfer, setDeviceIdToTransfer] = useState<string>("");
   const transferPlayback = useTransferPlayback(deviceIdToTransfer);
+  const skipPlayerData = useSkipPlayer();
+  const previousPlayerData = usePreviousPlayer();
 
   const onExpandFooterPress = (): void => {
     setFooterOpen((prev) => !prev);
@@ -135,6 +139,16 @@ export const BaseLayoutProvider = ({
 
   const onDevicePress = (deviceId: string): void => {
     setDeviceIdToTransfer(deviceId);
+  };
+
+  const onSkipPress = (): void => {
+    skipPlayerData.reset();
+    skipPlayerData.trigger();
+  };
+
+  const onPreviousPress = (): void => {
+    previousPlayerData.reset();
+    previousPlayerData.trigger();
   };
 
   useEffect(() => {
@@ -208,6 +222,8 @@ export const BaseLayoutProvider = ({
             onShufflePress={onShufflePress}
             onDevicesPress={onDevicesPress}
             onArrowClick={onExpandFooterPress}
+            onSkipPress={onSkipPress}
+            onPreviousPress={onPreviousPress}
           />
         )}
 

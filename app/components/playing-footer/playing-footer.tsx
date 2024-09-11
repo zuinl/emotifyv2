@@ -23,6 +23,8 @@ export const PlayingFooter = ({
   onRepeatPress,
   onShufflePress,
   onDevicesPress,
+  onPreviousPress,
+  onSkipPress,
 }: PlayingFooterProps) => {
   let repeatIcon = "repeat";
   if (repeatState === "track") repeatIcon = "repeat-once";
@@ -87,7 +89,7 @@ export const PlayingFooter = ({
             />
           </View>
           <View style={styles.expandedIconsContainer}>
-            <Pressable onPress={() => {}} testID="previous-button">
+            <Pressable onPress={onPreviousPress} testID="previous-button">
               <Ionicons
                 name="play-skip-back"
                 color={colors.lightGrey}
@@ -118,7 +120,7 @@ export const PlayingFooter = ({
                 size={28}
               />
             </Pressable>
-            <Pressable onPress={() => {}} testID="next-button">
+            <Pressable onPress={onSkipPress} testID="next-button">
               <Ionicons
                 name="play-skip-forward"
                 color={colors.lightGrey}
