@@ -28,7 +28,7 @@ export const DeviceItem = ({
       <View style={styles.container}>
         {/* TODO: padronizar tamanho dos ícones */}
         <MaterialCommunityIcons
-        // @ts-expect-error ícone condicional
+          // @ts-expect-error ícone condicional
           name={deviceIcon}
           color={is_active ? colors.primary : colors.lightGrey}
           size={28}

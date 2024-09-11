@@ -37,6 +37,7 @@ export const BaseLayoutProvider = ({
   const [trackIdToSave, setTrackIdToSave] = useState<string>("");
   const [trackIdToRemove, setTrackIdToRemove] = useState<string>("");
   const [showDevices, setShowDevices] = useState<boolean>(false);
+  const [footerOpen, setFooterOpen] = useState<boolean>(false);
   const playerData = useGetPlayback(noPlayingFooter !== true);
   const devicesData = useGetDevices();
   const getDeviceToPlay = (): string => {
@@ -64,6 +65,10 @@ export const BaseLayoutProvider = ({
   const shuffleData = useToggleShuffleState(shuffle);
   const saveSongsData = useSaveSongs([trackIdToSave]);
   const removeSongsData = useRemoveSongs([trackIdToRemove]);
+
+  const onExpandFooterPress = (): void => {
+    setFooterOpen((prev) => !prev);
+  };
 
   const isTrackPlaying = (trackId: string): boolean => {
     return playerData.data?.item.id === trackId;
@@ -181,11 +186,12 @@ export const BaseLayoutProvider = ({
             playing={playerData.data?.is_playing}
             repeatState={playerData.data.repeat_state}
             shuffleState={playerData.data.shuffle_state}
+            expanded={footerOpen}
             onPlayClick={onPlayClick}
             onRepeatPress={onRepeatModePress}
             onShufflePress={onShufflePress}
             onDevicesPress={onDevicesPress}
-            onArrowClick={() => {}}
+            onArrowClick={onExpandFooterPress}
           />
         )}
 

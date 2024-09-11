@@ -17,6 +17,7 @@ export const PlayingFooter = ({
   playing,
   repeatState,
   shuffleState,
+  expanded,
   onArrowClick,
   onPlayClick,
   onRepeatPress,
@@ -69,56 +70,64 @@ export const PlayingFooter = ({
           />
         </Pressable>
         <Pressable onPress={onArrowClick} testID="expand-button">
-          <Ionicons name="chevron-up" color={colors.lightGrey} size={18} />
+          <Ionicons
+            name={expanded ? "chevron-down" : "chevron-up"}
+            color={colors.lightGrey}
+            size={18}
+          />
         </Pressable>
       </View>
-      <View style={styles.expandedContainer}>
-        <View style={styles.expandedSongImageContainer}>
-          <Image
-            source={{ uri: songImageUrl }}
-            style={styles.expandedSongImage}
-            testID="expanded-song-image"
-          />
+      {expanded && (
+        <View style={styles.expandedContainer}>
+          <View style={styles.expandedSongImageContainer}>
+            <Image
+              source={{ uri: songImageUrl }}
+              style={styles.expandedSongImage}
+              testID="expanded-song-image"
+            />
+          </View>
+          <View style={styles.expandedIconsContainer}>
+            <Pressable onPress={() => {}} testID="previous-button">
+              <Ionicons
+                name="play-skip-back"
+                color={colors.lightGrey}
+                size={32}
+              />
+            </Pressable>
+            <Pressable onPress={onShufflePress} testID="shuffle-button">
+              <Ionicons
+                name="shuffle"
+                color={shuffleState ? colors.primary : colors.lightGrey}
+                size={28}
+              />
+            </Pressable>
+            <Pressable onPress={onRepeatPress} testID="repeat-button">
+              <MaterialCommunityIcons
+                // @ts-expect-error ícone condicional
+                name={repeatIcon}
+                color={
+                  repeatState === "off" ? colors.lightGrey : colors.primary
+                }
+                size={28}
+              />
+            </Pressable>
+            <Pressable onPress={onDevicesPress} testID="devices-button">
+              <MaterialIcons
+                name="devices-other"
+                color={colors.lightGrey}
+                size={28}
+              />
+            </Pressable>
+            <Pressable onPress={() => {}} testID="next-button">
+              <Ionicons
+                name="play-skip-forward"
+                color={colors.lightGrey}
+                size={32}
+              />
+            </Pressable>
+          </View>
         </View>
-        <View style={styles.expandedIconsContainer}>
-          <Pressable onPress={() => {}} testID="previous-button">
-            <Ionicons
-              name="play-skip-back"
-              color={colors.lightGrey}
-              size={32}
-            />
-          </Pressable>
-          <Pressable onPress={onShufflePress} testID="shuffle-button">
-            <Ionicons
-              name="shuffle"
-              color={shuffleState ? colors.primary : colors.lightGrey}
-              size={28}
-            />
-          </Pressable>
-          <Pressable onPress={onRepeatPress} testID="repeat-button">
-            <MaterialCommunityIcons
-              // @ts-expect-error ícone condicional
-              name={repeatIcon}
-              color={repeatState === "off" ? colors.lightGrey : colors.primary}
-              size={28}
-            />
-          </Pressable>
-          <Pressable onPress={onDevicesPress} testID="devices-button">
-            <MaterialIcons
-              name="devices-other"
-              color={colors.lightGrey}
-              size={28}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} testID="next-button">
-            <Ionicons
-              name="play-skip-forward"
-              color={colors.lightGrey}
-              size={32}
-            />
-          </Pressable>
-        </View>
-      </View>
+      )}
     </View>
   );
 };

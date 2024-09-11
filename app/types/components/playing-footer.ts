@@ -38,6 +38,10 @@ export type PlayingFooterProps = {
    */
   shuffleState: boolean;
   /**
+   * Indica se está expandido
+   */
+  expanded: boolean;
+  /**
    * Callback para o toque no botão de play/pause
    * @returns void
    */
