@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     gap: 16,
   },
   songListFlatlistContainer: {
-    height: 280,
+    height: "auto",
     width: "100%",
   },
   songListContainer: {

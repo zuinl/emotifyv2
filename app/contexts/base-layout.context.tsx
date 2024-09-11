@@ -200,7 +200,15 @@ export const BaseLayoutProvider = ({
     >
       <StatusBar style="dark" />
 
-      <BaseLayout viewProps={baseViewProps}>
+      <BaseLayout
+        viewProps={{
+          ...baseViewProps,
+          style: [
+            baseViewProps?.style,
+            { paddingBottom: noPlayingFooter ? 0 : 90 },
+          ],
+        }}
+      >
         {children}
         {noPlayingFooter !== true && playerData.data?.device && (
           <PlayingFooter

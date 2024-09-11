@@ -12,16 +12,16 @@ export const TabMenu = ({ activeTab, onTabPress }: TabMenuProps) => {
           onPress={() => onTabPress("now")}
           active={activeTab === "now"}
         />
-        <Tab
+        {/* <Tab
           text="Playlists"
           onPress={() => onTabPress("playlists")}
           active={activeTab === "playlists"}
-        />
-        <Tab
+        /> */}
+        {/* <Tab
           text="Artistas"
           onPress={() => onTabPress("artists")}
           active={activeTab === "artists"}
-        />
+        /> */}
       </ScrollView>
     </View>
   );
