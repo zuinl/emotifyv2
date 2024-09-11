@@ -15,6 +15,7 @@ import { RepeatState } from "../types/services/common";
 import { useToggleShuffleState } from "../services/toggle-shuffle-state";
 import { useGetDevices } from "../services/get-devices";
 import { DevicesList } from "@components/devices-list/devices-list";
+import { useTransferPlayback } from "../services/transfer-playback";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;
@@ -65,6 +66,8 @@ export const BaseLayoutProvider = ({
   const shuffleData = useToggleShuffleState(shuffle);
   const saveSongsData = useSaveSongs([trackIdToSave]);
   const removeSongsData = useRemoveSongs([trackIdToRemove]);
+  const [deviceIdToTransfer, setDeviceIdToTransfer] = useState<string>("");
+  const transferPlayback = useTransferPlayback(deviceIdToTransfer);
 
   const onExpandFooterPress = (): void => {
     setFooterOpen((prev) => !prev);
@@ -131,7 +134,7 @@ export const BaseLayoutProvider = ({
   };
 
   const onDevicePress = (deviceId: string): void => {
-    //TODO: implementação
+    setDeviceIdToTransfer(deviceId);
   };
 
   useEffect(() => {
@@ -157,6 +160,19 @@ export const BaseLayoutProvider = ({
       shuffleData.trigger();
     }
   }, [shuffle]);
+
+  useEffect(() => {
+    if (deviceIdToTransfer) {
+      transferPlayback.reset();
+      transferPlayback.trigger();
+    }
+  }, [deviceIdToTransfer]);
+
+  useEffect(() => {
+    if (playerData.data) {
+      devicesData.mutate(undefined);
+    }
+  }, [playerData.data?.device.id]);
 
   return (
     <BaseLayoutContext.Provider

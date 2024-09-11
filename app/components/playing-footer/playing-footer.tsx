@@ -114,7 +114,7 @@ export const PlayingFooter = ({
             <Pressable onPress={onDevicesPress} testID="devices-button">
               <MaterialIcons
                 name="devices-other"
-                color={colors.lightGrey}
+                color={colors.secondary}
                 size={28}
               />
             </Pressable>

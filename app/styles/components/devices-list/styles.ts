@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   modalContainer: {
     width: "85%",
-    height: "40%",
+    height: "60%",
     backgroundColor: colors.pageBackground,
     opacity: 1,
     //TODO: padronizar border radius
