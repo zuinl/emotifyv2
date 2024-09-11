@@ -1,6 +1,6 @@
 import {
   ContextType,
-  DeviceType,
+  Device,
   ExternalUrls,
   PlayerActions,
   PlayingType,
@@ -70,39 +70,4 @@ export type GetPlaybackDTO = {
     disallows: PlayerActions;
     allows: PlayerActions;
   };
-};
-
-export type Device = {
-  /**
-   * Identificador do dispositivo
-   */
-  id: string;
-  /**
-   * Indica se o dispositivo está ativo
-   */
-  is_active: boolean;
-  /**
-   * Indica se a sessão no dispositivo é privada
-   */
-  is_private_session: boolean;
-  /**
-   * Indica se o dispositivo é restrito (não pode ser controlado remotamente)
-   */
-  is_restricted: boolean;
-  /**
-   * Nome do dispositivo
-   */
-  name: string;
-  /**
-   * Tipo do dispositivo
-   */
-  type: DeviceType;
-  /**
-   * Porcentagem do volume do dispositivo
-   */
-  volume_percent: number;
-  /**
-   * Indica se o volume pode ser controlado no dispositivo
-   */
-  supports_volume: boolean;
 };

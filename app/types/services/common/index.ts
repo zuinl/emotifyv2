@@ -11,7 +11,7 @@ export type RepeatState = "off" | "track" | "context";
 /**
  * O tipo de dispositivo
  */
-export type DeviceType = "computer" | "smartphone" | "speaker";
+export type DeviceType = "Computer" | "Smartphone" | "Speaker";
 
 /**
  * O tipo de faixa atualmente tocando
@@ -76,4 +76,39 @@ export type PlayerActions = {
   toggling_shuffle?: boolean;
   toggling_repeat_track?: boolean;
   transferring_playback?: boolean;
+};
+
+export type Device = {
+  /**
+   * Identificador do dispositivo
+   */
+  id: string;
+  /**
+   * Indica se o dispositivo está ativo
+   */
+  is_active: boolean;
+  /**
+   * Indica se a sessão no dispositivo é privada
+   */
+  is_private_session: boolean;
+  /**
+   * Indica se o dispositivo é restrito (não pode ser controlado remotamente)
+   */
+  is_restricted: boolean;
+  /**
+   * Nome do dispositivo
+   */
+  name: string;
+  /**
+   * Tipo do dispositivo
+   */
+  type: DeviceType;
+  /**
+   * Porcentagem do volume do dispositivo
+   */
+  volume_percent: number;
+  /**
+   * Indica se o volume pode ser controlado no dispositivo
+   */
+  supports_volume: boolean;
 };

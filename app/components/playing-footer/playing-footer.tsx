@@ -21,6 +21,7 @@ export const PlayingFooter = ({
   onPlayClick,
   onRepeatPress,
   onShufflePress,
+  onDevicesPress,
 }: PlayingFooterProps) => {
   let repeatIcon = "repeat";
   if (repeatState === "track") repeatIcon = "repeat-once";
@@ -102,7 +103,7 @@ export const PlayingFooter = ({
               size={28}
             />
           </Pressable>
-          <Pressable onPress={() => {}} testID="devices-button">
+          <Pressable onPress={onDevicesPress} testID="devices-button">
             <MaterialIcons
               name="devices-other"
               color={colors.lightGrey}

@@ -57,4 +57,9 @@ export type PlayingFooterProps = {
    * @returns void
    */
   onShufflePress: () => void;
+  /**
+   * Callback para o toque no ícone de dispositivos
+   * @returns void
+   */
+  onDevicesPress: () => void;
 };

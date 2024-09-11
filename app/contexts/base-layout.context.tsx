@@ -13,6 +13,8 @@ import { useRemoveSongs } from "../services/remove-songs";
 import { useSetRepeatMode } from "../services/set-repeat-state";
 import { RepeatState } from "../types/services/common";
 import { useToggleShuffleState } from "../services/toggle-shuffle-state";
+import { useGetDevices } from "../services/get-devices";
+import { DevicesList } from "@components/devices-list/devices-list";
 
 type BaseLayoutContextValue = {
   isPlaying: boolean;
@@ -34,7 +36,16 @@ export const BaseLayoutProvider = ({
   const [trackIdToPlay, setTrackIdToPlay] = useState<string>("");
   const [trackIdToSave, setTrackIdToSave] = useState<string>("");
   const [trackIdToRemove, setTrackIdToRemove] = useState<string>("");
+  const [showDevices, setShowDevices] = useState<boolean>(false);
   const playerData = useGetPlayback(noPlayingFooter !== true);
+  const devicesData = useGetDevices();
+  const getDeviceToPlay = (): string => {
+    if (playerData.data) {
+      return playerData.data.device.id;
+    }
+
+    return devicesData.data?.devices[0].id ?? "";
+  };
   const [repeatMode, setRepeatMode] = useState<RepeatState>(
     playerData.data?.repeat_state ?? "off",
   );
@@ -42,13 +53,13 @@ export const BaseLayoutProvider = ({
     playerData.data?.shuffle_state ?? false,
   );
   const startData = useStartPlayback({
-    device_id: playerData.data?.device.id,
+    device_id: getDeviceToPlay(),
     id: trackIdToPlay,
   });
   const resumeData = useResumePlayback({
-    device_id: playerData.data?.device.id,
+    device_id: getDeviceToPlay(),
   });
-  const pauseData = usePausePlayback(playerData.data?.device.id);
+  const pauseData = usePausePlayback(getDeviceToPlay());
   const repeatData = useSetRepeatMode(repeatMode);
   const shuffleData = useToggleShuffleState(shuffle);
   const saveSongsData = useSaveSongs([trackIdToSave]);
@@ -106,6 +117,18 @@ export const BaseLayoutProvider = ({
     setShuffle((prev) => !prev);
   };
 
+  const onDevicesPress = (): void => {
+    setShowDevices(true);
+  };
+
+  const onDevicesClose = (): void => {
+    setShowDevices(false);
+  };
+
+  const onDevicePress = (deviceId: string): void => {
+    //TODO: implementação
+  };
+
   useEffect(() => {
     if (trackIdToRemove) {
       removeSongsData.trigger();
@@ -161,7 +184,16 @@ export const BaseLayoutProvider = ({
             onPlayClick={onPlayClick}
             onRepeatPress={onRepeatModePress}
             onShufflePress={onShufflePress}
+            onDevicesPress={onDevicesPress}
             onArrowClick={() => {}}
+          />
+        )}
+
+        {showDevices && (
+          <DevicesList
+            devices={devicesData.data?.devices ?? []}
+            onClose={onDevicesClose}
+            onDevicePress={onDevicePress}
           />
         )}
       </BaseLayout>
